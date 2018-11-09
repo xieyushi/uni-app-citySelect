@@ -8,11 +8,10 @@
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex';
 	export default {
+		data(){
+			return {selectCity:''}
+		},
 		onLoad() {
 			//判断城市数据,如果没有,就重新请求一次.
 			if (this.selectCity) {} else {
@@ -21,13 +20,13 @@
 			//抓取活动
 
 		},
-		computed: {
-			...mapState({
-				selectCity: state => state.selectCity
-			})
+		onShow() {
+			const selectCity = uni.getStorageSync('selectCity');
+			if(selectCity){
+				this.selectCity = selectCity;
+			}
 		},
 		methods: {
-			...mapMutations(['setSelectCity']),
 			getLocation() {
 				uni.getLocation({
 					type: 'wgs84',
@@ -40,7 +39,7 @@
 								'&key=UGMBZ-S5AKU-YQGV3-47M5J-BAQ62-ZBBJW',
 							success: data => {
 								console.log(data);
-								this.setSelectCity(data.data.result.address_component.city);
+								this.selectCity = data.data.result.address_component.city;
 							}
 						});
 					}

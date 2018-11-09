@@ -1,9 +1,7 @@
 <template>
 	<view>
 		<view class="input">
-			<input placeholder="输入城市名或拼音查询" 
-			placeholder-style="font-size: 13px" :value="inputName" 
-			@input="bindKeyInput" @blur="bindBlur" />
+			<input placeholder="输入城市名或拼音查询" placeholder-style="font-size: 13px" :value="inputName" @input="bindKeyInput" @blur="bindBlur" />
 		</view>
 
 		<view class="container-inner">
@@ -37,7 +35,7 @@
 
 					<view class="selectCity">
 						<view class="hotcity-common" @click="reGetLocation" id="currentcity">重新定位城市</view>
-						<view class="thisCityName"  @click="bindCity" :data-code="currentCityCode" :data-city="currentCity">{{ currentCity }}</view>
+						<view class="thisCityName" @click="bindCity" :data-code="currentCityCode" :data-city="currentCity">{{ currentCity }}</view>
 
 						<view class="hotcity-common">热门城市</view>
 						<view class="weui-grids">
@@ -90,14 +88,7 @@
 
 <script>
 	import city from '../../common/city.js';
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex';
 	export default {
-		computed: {
-			...mapState(['selectCity'])
-		},
 		data() {
 			return {
 				searchLetter: [],
@@ -144,7 +135,6 @@
 			this.getLocation();
 		},
 		methods: {
-			...mapMutations(['setSelectCity']),
 			getLocation() {
 				uni.getLocation({
 					type: 'wgs84',
@@ -180,7 +170,8 @@
 			// 选择城市
 			bindCity(e) {
 				this.condition = true;
-				this.setSelectCity(e.currentTarget.dataset.city);
+				//缓存选择的城市
+				uni.setStorageSync('selectCity', e.currentTarget.dataset.city);
 				uni.navigateBack({
 					delta: 1
 				});
@@ -456,8 +447,8 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
-	
-	view{
+
+	view {
 		display: block;
 	}
 </style>
