@@ -1,8 +1,0 @@
-<template name="7ac770bc">
-  <view class="_view data-v-13bda83e content">
-    <view class="_view data-v-13bda83e location" bindtap="handleProxy" data-eventid="{{'7QH-0'}}" data-comkey="{{$k}}">
-      <text class="_text data-v-13bda83e city">{{selectCity}}</text>
-      <button class="_button data-v-13bda83e">选择城市</button>
-    </view>
-  </view>
-</template>

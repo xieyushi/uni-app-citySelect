@@ -1,7 +1,0 @@
-
-page,
-view {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-}
